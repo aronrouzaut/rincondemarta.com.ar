@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es" class="dark"> <!-- Clase 'dark' activada por defecto -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercería, Lanas e Hilos</title>
+    <!-- Carga de Tailwind CSS para un diseño responsivo y fácil -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Definición de Variables CSS proporcionadas por el usuario */
+        :root {
+            font-size: 16px;
+            --primaryColorVar: #00632f; /* Verde principal */
+            --secondaryColorVar: #e3bb71;
+            --primaryTextColorVar: #ffffff;
+            --textColorByPrimaryColorVar: #ffffff;
+            --primaryFontVar: 'Bitter', sans-serif;
+            --button-border-radius: 6px;
+
+            /* Variables de Tema - Modo CLARO (Valores por defecto) */
+            --backgroundVar: #f3f4f6; /* Fondo de la página claro */
+            --textColorByBackgroundVar: #000000;
+            --cardBackgroundVar: #003f1d; /* Fondo de la tarjeta claro */
+            --cardShadowVar: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+            /* Resto de variables (no cambiadas por el tema, pero mantenidas) */
+            --DiscoveryRGBAVar: rgba(0,99,47,0.05);
+            --luminanceByPrimaryColorVar: #1cff88;
+            --secondaryTextColorVar: #333;
+            --filterRGBAWithLowOpacityVar: rgba(0,99,47,0.1);
+            --filterRGBAWithHighOpacityVar: rgba(0,99,47,0.9);
+            --tertiaryColorVar: #3db877;
+            --secondaryFontVar: 'Bitter', sans-serif;
+            --colorOrBlackByPrimaryColor: #00632f;
+            /* ... Otras variables de color y estilos ... */
+            --headerTransparencyBackground: rgba(0,99,47,1.0);
+            --button-primary-hover-background-color: #00632f;
+        }
+
+        /* Variables de Tema - Modo OSCURO (Se aplican cuando <html> tiene la clase 'dark') */
+        html.dark {
+            --backgroundVar: #18251e; /* Dark green from me */
+            --textColorByBackgroundVar: #f3f4f6; /* Light Gray */
+            --cardBackgroundVar: #003f1d;
+            --cardShadowVar: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Aplicación de las variables a elementos específicos */
+        body {
+            font-family: var(--primaryFontVar);
+            background-color: var(--backgroundVar); /* Fondo dinámico */
+            color: var(--textColorByBackgroundVar); /* Color de texto base dinámico */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Estilo para el contenedor principal (la tarjeta) */
+        .main-card {
+            background-color: var(--cardBackgroundVar); /* Fondo de tarjeta dinámico */
+            box-shadow: var(--cardShadowVar); /* Sombra de tarjeta dinámica */
+            border-radius: var(--card-border-radius, 0.75rem); /* Uso de la variable o un valor por defecto */
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Estilo del botón primario */
+        .primary-button {
+            background-color: var(--primaryColorVar);
+            color: var(--textColorByPrimaryColorVar);
+            border-radius: var(--button-border-radius);
+            transition: background-color 0.2s;
+            --button-hover-bg: var(--button-primary-hover-background-color, var(--primaryColorVar));
+        }
+
+        .primary-button:hover {
+            opacity: 0.9;
+            background-color: var(--button-hover-bg);
+        }
+
+        /* Estilos específicos para el interruptor de tema */
+        .toggle-switch-base {
+            background-color: #4b5563; /* gris oscuro para la base del switch */
+        }
+        html.dark .toggle-switch-base {
+            background-color: var(--primaryColorVar); /* Usar color primario en dark mode activo */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Theme Switch (Toggle) - Posición fija abajo a la izquierda -->
+    <div class="fixed bottom-4 left-4 z-10 p-2 rounded-xl bg-gray-50/10 backdrop-blur-sm shadow-xl border border-gray-200/20">
+        <label for="theme-switch" class="flex items-center cursor-pointer select-none text-sm font-semibold">
+            <span class="mr-3 text-gray-800 dark:text-gray-300">Claro</span>
+            <div class="relative">
+                <input type="checkbox" id="theme-switch" class="sr-only">
+                <!-- Base del switch -->
+                <div class="toggle-switch-base block w-12 h-6 rounded-full transition duration-300 ease-in-out"></div>
+                <!-- Círculo (Dot) del interruptor -->
+                <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition transform duration-300 ease-in-out flex items-center justify-center">
+                    <!-- Icono (Será actualizado por JS) -->
+                </div>
+            </div>
+            <span class="ml-3 text-white dark:text-yellow-400">Oscuro</span>
+        </label>
+    </div>
+
+    <!-- Contenedor principal centrado vertical y horizontalmente -->
+    <div class="main-card flex flex-col items-center justify-center w-full max-w-md p-8 space-y-8">
+        
+
+        <!-- Título PNG (Placeholder) -->
+        <img
+            src="rdm.png"
+            alt="Título de la Marca (Logo PNG)"
+            class="max-w-full h-auto rounded-lg"
+            onerror="this.onerror=null; this.src='https://placehold.co/300x100/00632f/ffffff?text=Logo';"
+        >
+        
+        <!-- Botón de WhatsApp -->
+        <a href="#"
+            class="primary-button text-lg font-semibold w-full px-6 py-3 shadow-md focus:outline-none focus:ring-4 focus:ring-opacity-50 text-center inline-flex items-center justify-center"
+            onclick="console.log('Botón de WhatsApp presionado. Reemplaza este evento con la URL de wa.me/numero')"
+        >
+            <!-- Icono de WhatsApp (SVG en línea para consistencia y estética) -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+  <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
+</svg>
+                  &nbsp;Enviar WhatsApp
+        </a>
+    </div>
+
+    <script>
+        const htmlElement = document.documentElement;
+        const switchInput = document.getElementById('theme-switch');
+        const dot = document.querySelector('.dot');
+
+        // Íconos SVG para Sol (Claro) y Luna (Oscuro)
+        const SUN_ICON = '<svg class="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 18a6 6 0 100-12 6 6 0 000 12zm0-2a4 4 0 110-8 4 4 0 010 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm14.142 14.142l1.414-1.414-2.121-2.121-1.414 1.414 2.121 2.121zm-12.02-3.182l-1.414 1.414-2.121-2.121 1.414-1.414 2.121 2.121zm10.606 0l1.414 1.414-2.121-2.121-1.414 1.414 2.121 2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></svg>';
+        const MOON_ICON = '<svg class="w-3 h-3 text-gray-800" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 21.01c-.115 0-.229-.018-.343-.053-1.637-.492-3.037-1.78-3.95-3.417-1.125-2.038-1.28-4.522-.52-6.845.76-2.322 2.345-4.225 4.545-5.325.213-.107.452-.107.665 0 .213.107.348.33.348.57 0 .24-.135.463-.348.57-1.92 1.05-3.23 2.76-3.88 4.75-.65 1.99.04 4.09 1.83 5.375.98 1.42 2.41 2.3 4.05 2.58.24.04.475.175.58.388.107.213.107.452 0 .665-.107.213-.33.348-.57.348z"/></svg>';
+
+        function setTheme(theme) {
+            const isDark = theme === 'dark';
+            
+            // 1. Aplicar clase al HTML
+            if (isDark) {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+            }
+
+            // 2. Controlar el estado del checkbox
+            switchInput.checked = isDark;
+
+            // 3. Mover el dot y cambiar el icono
+            if (isDark) {
+                dot.innerHTML = MOON_ICON;
+                dot.style.transform = 'translateX(1.5rem)'; /* Mueve el dot a la derecha (12/16ths de 48px/12 = 3rem) - w-12 es 3rem. 1.5rem es el centro del track */
+            } else {
+                dot.innerHTML = SUN_ICON;
+                dot.style.transform = 'translateX(0.25rem)'; /* Mueve el dot a la izquierda (1/4 de rem para padding visual) */
+            }
+
+            // 4. Guardar preferencia
+            localStorage.setItem('theme', theme);
+        }
+
+        // --- INICIALIZACIÓN ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            
+            // 1. Determinar el tema inicial (por defecto 'dark' si no hay guardado)
+            const initialTheme = savedTheme || 'dark'; 
+            
+            // 2. Aplicar el tema (se hace en un pequeño timeout para que la transición sea visible)
+            setTheme(initialTheme);
+        });
+
+        // --- EVENT LISTENER ---
+        switchInput.addEventListener('change', (e) => {
+            const newTheme = e.target.checked ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+        
+    </script>
+</body>
+</html>
